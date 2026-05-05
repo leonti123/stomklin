@@ -3,9 +3,9 @@
     public class Stom
     {
         public int Id { get; set; }
-        public string medicine { get; set; }
-        public string specific_medicine { get; set; }
-        public int expiration_date { get; set; }
+        public string medicine_category { get; set; }
+        public string medicine_name { get; set; }
+        public int DATE_OF_MANUFACTURE { get; set; }
         public decimal Price { get; set; }
     }
 }

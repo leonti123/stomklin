@@ -1,0 +1,12 @@
+# Игнорируем папки Visual Studio
+.vs/
+*.user
+*.suo
+
+# Игнорируем папки сборки .NET (C#)
+bin/
+obj/
+
+# Игнорируем локальные настройки и секреты
+appsettings.Development.json
+appsettings.Local.json
