@@ -20,7 +20,7 @@ namespace NaumovStomKlin.API.Controllers
 
         public ActionResult<List<Role>> GetAll()
         {
-            return Ok(_context.Users.ToList());
+            return Ok(_context.Rols.ToList());
         }
 
         [HttpPost]

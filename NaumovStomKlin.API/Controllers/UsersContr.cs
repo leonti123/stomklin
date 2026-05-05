@@ -23,6 +23,36 @@ namespace NaumovStomKlin.API.Controllers
             return Ok(_context.Users.ToList());
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<User> GetById(int id) 
+        {
+            var user = _context.Users.Find(id);
+
+            if (user == null) 
+            {
+                return NotFound(new { message = $"Пользователь с id {id} не найден" });
+            }
+
+            return Ok(user);
+        
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id) 
+        {
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "Невозможно удалить: пользователь не найден" });
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return Ok(new { message = $"Пользователь с id {id} успешно удалён" });
+        }
+
         [HttpPost]
         public ActionResult<User> Create(User user)
         {

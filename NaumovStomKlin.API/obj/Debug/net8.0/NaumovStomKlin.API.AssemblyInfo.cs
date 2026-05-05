@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NaumovStomKlin.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f01cee07e8164a0df6107bbb8e445505ebc2c948")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+afb7799aa822b7d694d24a88021193cf797de259")]
 [assembly: System.Reflection.AssemblyProductAttribute("NaumovStomKlin.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NaumovStomKlin.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

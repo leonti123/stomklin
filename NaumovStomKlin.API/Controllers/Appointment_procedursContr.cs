@@ -23,7 +23,7 @@ namespace NaumovStomKlin.API.Controllers
             return Ok(_context.Appointment_procedurs.ToList());
         }
 
-
+        
 
         [HttpPost]
         public ActionResult<Appointment_procedure> Create(Appointment_procedure appointment_procedure)
