@@ -9,28 +9,28 @@ namespace NaumovStomKlin.API.Controllers
     [Route("api/[controller]")]
 
 
-    public class StomContr : ControllerBase
+    public class AppointmentContr : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public StomContr(AppDbContext context)
+        public AppointmentContr(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
 
-        public ActionResult<List<Stom>> GetAll()
+        public ActionResult<List<Appointment>> GetAll()
         {
-            return Ok(_context.Stoms.ToList());
+            return Ok(_context.Appointments.ToList());
         }
 
         [HttpPost]
-        public ActionResult<Stom> Create(Stom stom)
+        public ActionResult<Appointment> Create(Appointment appointment)
         {
-            _context.Stoms.Add(stom);
+            _context.Appointments.Add(appointment);
             _context.SaveChanges();
-            return Ok(stom);
+            return Ok(appointment);
         }
     }
 }
