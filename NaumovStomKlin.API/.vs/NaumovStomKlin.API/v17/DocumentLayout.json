@@ -3,48 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\appointment_procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\appointment_procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\appointment_procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\appointment_procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\appointmentscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\appointmentscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|c:\\users\\228p\\desktop\\\u043D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\naumovstomklin.api\\controllers\\rolscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\rolscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\userscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\userscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\appointment_procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\appointment_procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\appointmentscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\appointmentscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\procedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\controllers\\procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:controllers\\procedurscontr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FB21F9F-7263-4364-873F-3B492461ACDB}|NaumovStomKlin.API.csproj|C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\migrations\\20260505095849_createuserstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,17 +78,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\User.cs*",
-              "RelativeToolTip": "Models\\User.cs*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAhAAAA",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T08:35:50.649Z",
               "IsPinned": true,
@@ -96,58 +96,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RolsContr.cs",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\RolsContr.cs",
-              "RelativeDocumentMoniker": "Controllers\\RolsContr.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\RolsContr.cs",
-              "RelativeToolTip": "Controllers\\RolsContr.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T10:35:38.842Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-05T11:42:47.973Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Appointment_procedursContr.cs",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\Appointment_procedursContr.cs",
-              "RelativeDocumentMoniker": "Controllers\\Appointment_procedursContr.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\Appointment_procedursContr.cs",
-              "RelativeToolTip": "Controllers\\Appointment_procedursContr.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T11:00:00.012Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "AppointmentsContr.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\AppointmentsContr.cs",
               "RelativeDocumentMoniker": "Controllers\\AppointmentsContr.cs",
               "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\AppointmentsContr.cs",
               "RelativeToolTip": "Controllers\\AppointmentsContr.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAJAAAA",
+              "ViewState": "AQIAACMAAAAAAAAAAADwv0MAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-27T10:38:13.132Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\Role.cs",
               "RelativeDocumentMoniker": "Models\\Role.cs",
@@ -156,19 +118,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T10:31:26.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T11:14:00.153Z",
               "EditorCaption": ""
             },
             {
@@ -185,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "Procedure.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\Procedure.cs",
               "RelativeDocumentMoniker": "Models\\Procedure.cs",
@@ -198,20 +147,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Appointment_procedure.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\Appointment_procedure.cs",
               "RelativeDocumentMoniker": "Models\\Appointment_procedure.cs",
               "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\Appointment_procedure.cs",
               "RelativeToolTip": "Models\\Appointment_procedure.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAZAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T10:54:25.511Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Appointment.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Models\\Appointment.cs",
               "RelativeDocumentMoniker": "Models\\Appointment.cs",
@@ -224,6 +173,83 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsersContr.cs",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\UsersContr.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersContr.cs",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\UsersContr.cs",
+              "RelativeToolTip": "Controllers\\UsersContr.cs",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAUwFsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T08:53:07.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RolsContr.cs",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\RolsContr.cs",
+              "RelativeDocumentMoniker": "Controllers\\RolsContr.cs",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\RolsContr.cs",
+              "RelativeToolTip": "Controllers\\RolsContr.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAAGMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T10:35:38.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProcedursContr.cs",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\ProcedursContr.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProcedursContr.cs",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\ProcedursContr.cs",
+              "RelativeToolTip": "Controllers\\ProcedursContr.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAxwF8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T10:47:24.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Appointment_procedursContr.cs",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\Appointment_procedursContr.cs",
+              "RelativeDocumentMoniker": "Controllers\\Appointment_procedursContr.cs",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\Appointment_procedursContr.cs",
+              "RelativeToolTip": "Controllers\\Appointment_procedursContr.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGEAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T11:00:00.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-27T11:14:00.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-05T11:42:47.973Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 14,
               "Title": "20260505113839_CreateAllTables.cs",
               "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Migrations\\20260505113839_CreateAllTables.cs",
@@ -233,32 +259,6 @@
               "ViewState": "AQIAACgAAAAAAAAAAAAgwBMAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T11:38:39.676Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ProcedursContr.cs",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\ProcedursContr.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProcedursContr.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\ProcedursContr.cs",
-              "RelativeToolTip": "Controllers\\ProcedursContr.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T10:47:24.514Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UsersContr.cs",
-              "DocumentMoniker": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\UsersContr.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsersContr.cs",
-              "ToolTip": "C:\\Users\\228p\\Desktop\\\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430\\stomklin\\NaumovStomKlin.API\\Controllers\\UsersContr.cs",
-              "RelativeToolTip": "Controllers\\UsersContr.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAIwFYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T08:53:07.941Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
