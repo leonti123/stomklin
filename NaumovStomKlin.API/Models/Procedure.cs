@@ -8,7 +8,8 @@
 
         public int price { get; set; }
 
-
-
+        public List<Appointment_procedure>? appointment_procedures { get; set; } = new();
     }
+
 }
+

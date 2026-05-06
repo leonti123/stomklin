@@ -14,10 +14,10 @@
 
         public int role_id { get; set; }
 
-        public Role role { get; set; }
+        public Role? role { get; set; }
 
-        public List<Appointment> appointments_as_patient { get; set; } = new();
+        public List<Appointment>? appointments_as_patient { get; set; } = new();
 
-        public List<Appointment> appointments_as_doctor { get; set; } = new();
+        public List<Appointment>? appointments_as_doctor { get; set; } = new();
     }
 }

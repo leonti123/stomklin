@@ -16,7 +16,7 @@
 
         public string status { get; set; }
 
-        public List<Appointment_procedure> appointment_procedurs { get; set; } = new();
+        public List<Appointment_procedure>? appointment_procedurs { get; set; } = new();
 
 
 
