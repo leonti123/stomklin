@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NaumovStomKlin.API.Data;
 using NaumovStomKlin.API.Models;
+using System.Threading.Tasks;
 
 namespace NaumovStomKlin.API.Controllers
 {
@@ -20,38 +21,50 @@ namespace NaumovStomKlin.API.Controllers
         }
 
         [HttpGet]
-
-        public ActionResult<List<Appointment>> GetAll()
+        public async Task<ActionResult<List<Appointment>>> GetAll()
         {
-            return Ok(_context.Appointments.ToList());
+
+            var appointments = await _context.Appointments
+                 .Include(a => a.patient)
+                 .Include(a => a.doctor)
+                 .Include(a => a.appointment_procedurs!)
+                 .ThenInclude(ap => ap.procedure)
+                 .ToListAsync();
+            return Ok(appointments);
         }
 
         [HttpPost]
-        public ActionResult<Appointment> Create(Appointment appointment)
+        public async Task<ActionResult<Appointment>> Create(Appointment appointment)
         {
             _context.Appointments.Add(appointment);
-            _context.SaveChanges();
-            return Ok(appointment);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetById), new { id = appointment.Id }, appointment);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Appointment> GetById(int id)
+        public async Task<ActionResult<Appointment>> GetById(int id)
         {
-            var appointment = _context.Appointments.Find(id);
+            // Используем FirstOrDefaultAsync с Include, чтобы получить полную инфу
+            var appointment = await _context.Appointments
+                .Include(a => a.patient)
+                .Include(a => a.doctor)
+                .Include(a => a.appointment_procedurs!)
+                    .ThenInclude(ap => ap.procedure)
+                .FirstOrDefaultAsync(a => a.Id == id);
 
             if (appointment == null)
             {
-                return NotFound(new { message = $"запись на приём с id {id} не найден" });
+                return NotFound(new { message = $"Запись на приём с id {id} не найдена" });
             }
 
             return Ok(appointment);
-
         }
-        
+
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var appointment = _context.Appointments.Find(id);
+            // ИСПРАВЛЕНО: Добавлен await и FindAsync
+            var appointment = await _context.Appointments.FindAsync(id);
 
             if (appointment == null)
             {
@@ -59,7 +72,7 @@ namespace NaumovStomKlin.API.Controllers
             }
 
             _context.Appointments.Remove(appointment);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(new { message = $"Запись на приём с id {id} успешно удалёна" });
         }
@@ -79,7 +92,7 @@ namespace NaumovStomKlin.API.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
                 if (!AppointmentExists(id))
                 {
@@ -97,7 +110,7 @@ namespace NaumovStomKlin.API.Controllers
         }
         private bool AppointmentExists(int id)
         {
-            return _context.Rols.Any(e => e.id == id);
+            return _context.Appointments.Any(e => e.Id == id);
         }
 
     }
