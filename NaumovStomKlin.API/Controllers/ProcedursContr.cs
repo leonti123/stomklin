@@ -17,39 +17,42 @@ namespace NaumovStomKlin.API.Controllers
 
         { _context = context; }
 
-        [HttpGet("procedurs")]
-
-        public ActionResult<List<Procedure>> GetAll()
+        [HttpGet] // Убрал лишний подмаршрут "procedurs", чтобы путь был api/ProcedursContr
+        public async Task<ActionResult<List<Procedure>>> GetAll()
         {
-            return Ok(_context.Procedurs.ToList());
+            // Используем ToListAsync для асинхронности
+            return Ok(await _context.Procedurs.ToListAsync());
         }
 
         [HttpPost]
-        public ActionResult<Procedure> Create(Procedure procedure)
+        public async Task<ActionResult<Procedure>> Create(Procedure procedure)
         {
             _context.Procedurs.Add(procedure);
-            _context.SaveChanges();
-            return Ok(procedure);
+            await _context.SaveChangesAsync();
+
+            // Возвращаем CreatedAtAction — это стандарт для POST-запросов
+            return CreatedAtAction(nameof(GetById), new { id = procedure.id }, procedure);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Procedure> GetById(int id)
+        public async Task<ActionResult<Procedure>> GetById(int id)
         {
-            var procedure = _context.Procedurs.Find(id);
+            // Используем FindAsync
+            var procedure = await _context.Procedurs.FindAsync(id);
 
             if (procedure == null)
             {
-                return NotFound(new { message = $"Процедура с id {id} не найден" });
+                return NotFound(new { message = $"Процедура с id {id} не найдена" });
             }
 
             return Ok(procedure);
-
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var procedure = _context.Procedurs.Find(id);
+            // ИСПРАВЛЕНО: Добавлен await и FindAsync для асинхронности
+            var procedure = await _context.Procedurs.FindAsync(id);
 
             if (procedure == null)
             {
@@ -57,9 +60,10 @@ namespace NaumovStomKlin.API.Controllers
             }
 
             _context.Procedurs.Remove(procedure);
-            _context.SaveChanges();
+            // ИСПРАВЛЕНО: Добавлен await SaveChangesAsync
+            await _context.SaveChangesAsync();
 
-            return Ok(new { message = $"Процедура с id {id} успешно удалёна" });
+            return Ok(new { message = $"Процедура с id {id} успешно удалена" });
         }
 
         [HttpPut("{id}")]
@@ -77,7 +81,7 @@ namespace NaumovStomKlin.API.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
                 if (!ProcedureExists(id))
                 {
@@ -95,7 +99,7 @@ namespace NaumovStomKlin.API.Controllers
         }
         private bool ProcedureExists(int id)
         {
-            return _context.Rols.Any(e => e.id == id);
+            return _context.Procedurs.Any(e => e.id == id);
         }
 
     }

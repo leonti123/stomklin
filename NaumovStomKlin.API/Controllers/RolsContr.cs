@@ -17,39 +17,42 @@ namespace NaumovStomKlin.API.Controllers
 
         { _context = context; }
 
-        [HttpGet("rols")]
-
-        public ActionResult<List<Role>> GetAll()
+        [HttpGet] // Убрал "rols", чтобы путь был стандартным: api/RolsContr
+        public async Task<ActionResult<List<Role>>> GetAll()
         {
-            return Ok(_context.Rols.ToList());
+            // Сделал метод асинхронным
+            return Ok(await _context.Rols.ToListAsync());
         }
 
         [HttpPost]
-        public ActionResult<Role> Create(Role role)
+        public async Task<ActionResult<Role>> Create(Role role)
         {
             _context.Rols.Add(role);
-            _context.SaveChanges();
-            return Ok(role);
+            await _context.SaveChangesAsync();
+
+            // Заменил Ok на CreatedAtAction для соблюдения стандартов POST
+            return CreatedAtAction(nameof(GetById), new { id = role.id }, role);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Role> GetById(int id)
+        public async Task<ActionResult<Role>> GetById(int id)
         {
-            var role = _context.Rols.Find(id);
+            // Сделал метод асинхронным
+            var role = await _context.Rols.FindAsync(id);
 
             if (role == null)
             {
-                return NotFound(new { message = $"Роль с id {id} не найден" });
+                return NotFound(new { message = $"Роль с id {id} не найдена" });
             }
 
             return Ok(role);
-
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var role = _context.Rols.Find(id);
+            // ИСПРАВЛЕНО: Добавлен await и FindAsync
+            var role = await _context.Rols.FindAsync(id);
 
             if (role == null)
             {
@@ -57,9 +60,10 @@ namespace NaumovStomKlin.API.Controllers
             }
 
             _context.Rols.Remove(role);
-            _context.SaveChanges();
+            // ИСПРАВЛЕНО: Добавлен await SaveChangesAsync
+            await _context.SaveChangesAsync();
 
-            return Ok(new { message = $"Роль с id {id} успешно удалёна" });
+            return Ok(new { message = $"Роль с id {id} успешно удалена" });
         }
 
         [HttpPut("{id}")]
@@ -77,7 +81,7 @@ namespace NaumovStomKlin.API.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
                 if (!RoleExists(id))
                 {

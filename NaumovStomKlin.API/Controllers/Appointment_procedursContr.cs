@@ -8,50 +8,69 @@ namespace NaumovStomKlin.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class Appointment_procedursContr : ControllerBase
     {
         private readonly AppDbContext _context;
 
         public Appointment_procedursContr(AppDbContext context)
-
-        { _context = context; }
-
-        [HttpGet("appoinment_procedurs")]
-
-        public ActionResult<List<Appointment_procedure>> GetAll()
         {
-            return Ok(_context.Appointment_procedurs.ToList());
+            _context = context;
         }
 
-        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Appointment_procedure>>> GetAll()
+        {
+            return await _context.Appointment_procedurs
+                .Include(ap => ap.procedure)
+                .ToListAsync();
+        }
 
         [HttpPost]
-        public ActionResult<Appointment_procedure> Create(Appointment_procedure appointment_procedure)
+        public async Task<ActionResult<Appointment_procedure>> Create(Appointment_procedure appointment_procedure)
         {
+            if (appointment_procedure == null)
+            {
+                return BadRequest(new { message = "Данные запроса пусты" });
+            }
+
+            // Валидация внешних ключей
+            var appointmentExists = await _context.Appointments.AnyAsync(a => a.id == appointment_procedure.appointment_id);
+            var procedureExists = await _context.Procedurs.AnyAsync(p => p.id == appointment_procedure.procedure_id);
+
+            if (!appointmentExists || !procedureExists)
+            {
+                return BadRequest(new
+                {
+                    message = "Ошибка: Указан несуществующий ID приема или процедуры.",
+                    details = new { appointment_found = appointmentExists, procedure_found = procedureExists }
+                });
+            }
+
             _context.Appointment_procedurs.Add(appointment_procedure);
-            _context.SaveChanges();
-            return Ok(appointment_procedure);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = appointment_procedure.id }, appointment_procedure);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Appointment_procedure> GetById(int id)
+        public async Task<ActionResult<Appointment_procedure>> GetById(int id)
         {
-            var appointment_procedure = _context.Appointment_procedurs.Find(id);
+            var appointment_procedure = await _context.Appointment_procedurs
+                .Include(ap => ap.procedure)
+                .FirstOrDefaultAsync(ap => ap.id == id);
 
             if (appointment_procedure == null)
             {
-                return NotFound(new { message = $"Запись на процедуру с id {id} не найден" });
+                return NotFound(new { message = $"Запись на процедуру с id {id} не найдена" });
             }
 
             return Ok(appointment_procedure);
-
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var appointment_procedure = _context.Appointment_procedurs.Find(id);
+            var appointment_procedure = await _context.Appointment_procedurs.FindAsync(id);
 
             if (appointment_procedure == null)
             {
@@ -59,9 +78,9 @@ namespace NaumovStomKlin.API.Controllers
             }
 
             _context.Appointment_procedurs.Remove(appointment_procedure);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            return Ok(new { message = $"Запись на процедуру с id {id} успешно удалёна" });
+            return Ok(new { message = $"Запись на процедуру с id {id} успешно удалена" });
         }
 
         [HttpPut("{id}")]
@@ -69,7 +88,20 @@ namespace NaumovStomKlin.API.Controllers
         {
             if (id != appointment_procedure.id)
             {
-                return BadRequest();
+                return BadRequest(new { message = "ID в пути и в теле запроса не совпадают" });
+            }
+
+            // ДОБАВЛЕНО: Валидация внешних ключей при обновлении
+            var appointmentExists = await _context.Appointments.AnyAsync(a => a.id == appointment_procedure.appointment_id);
+            var procedureExists = await _context.Procedurs.AnyAsync(p => p.id == appointment_procedure.procedure_id);
+
+            if (!appointmentExists || !procedureExists)
+            {
+                return BadRequest(new
+                {
+                    message = "Ошибка обновления: Указан несуществующий ID приема или процедуры.",
+                    details = new { appointment_found = appointmentExists, procedure_found = procedureExists }
+                });
             }
 
             _context.Entry(appointment_procedure).State = EntityState.Modified;
@@ -78,8 +110,7 @@ namespace NaumovStomKlin.API.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
                 if (!Appointment_procedureExists(id))
                 {
@@ -89,16 +120,14 @@ namespace NaumovStomKlin.API.Controllers
                 {
                     throw;
                 }
-
-
-
             }
+
             return NoContent();
         }
+
         private bool Appointment_procedureExists(int id)
         {
-            return _context.Rols.Any(e => e.id == id);
+            return _context.Appointment_procedurs.Any(e => e.id == id);
         }
-
     }
 }

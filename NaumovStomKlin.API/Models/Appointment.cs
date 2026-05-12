@@ -1,24 +1,37 @@
-﻿namespace NaumovStomKlin.API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+
+namespace NaumovStomKlin.API.Models
 {
     public class Appointment
     {
-        public int Id { get; set; }
+        public int id { get; set; }
+        public DateTime appointment_date { get; set; }
 
-        public int user_id { get; set; }
-
-        public User patient { get; set; }
+        // Явное указание внешних ключей помогает EF правильно строить связи
+        public int patient_id { get; set; }
+        [ForeignKey("patient_id")]
+        public User? patient { get; set; }
 
         public int doctor_id { get; set; }
+        [ForeignKey("doctor_id")]
+        public User? doctor { get; set; }
 
-        public User doctor { get; set; }
+        public string status { get; set; } = string.Empty;
 
-        public DateTime created_at { get; set; }
+        // Список инициализирован, поэтому он не будет null
+        public List<Appointment_procedure> appointment_procedures { get; set; } = [];
 
-        public string status { get; set; }
-
-        public List<Appointment_procedure>? appointment_procedurs { get; set; } = new();
-
-
-
+        // Расчетное поле
+        [NotMapped]
+        public decimal total_price
+        {
+            get
+            {
+                // Убираем лишнюю проверку на null для списка и суммируем
+                // Предполагаем, что ap.procedure.price теперь тоже decimal
+                return appointment_procedures.Sum(ap => ap.procedure?.price ?? 0m);
+            }
+        }
     }
 }
