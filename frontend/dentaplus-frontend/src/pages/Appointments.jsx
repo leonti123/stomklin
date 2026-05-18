@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Calendar, Plus, Edit2, Trash2 } from 'lucide-react';
+import { Calendar, Plus, Edit2, Trash2, Clock } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5274/api';
+const API_BASE = 'http://localhost:7057/api';
 
 export default function Appointments() {
   const { user } = useAuth();
   const [appointments, setAppointments] = useState([]);
-  const [procedures, setProcedures] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -27,14 +26,12 @@ export default function Appointments() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [appRes, procRes, userRes] = await Promise.all([
+      const [appRes, userRes] = await Promise.all([
         fetch(`${API_BASE}/AppointmentContr`),
-        fetch(`${API_BASE}/ProcedursContr`),
         fetch(`${API_BASE}/UsersContr`)
       ]);
 
       setAppointments(await appRes.json());
-      setProcedures(await procRes.json());
       setUsers(await userRes.json());
     } catch (err) {
       console.error(err);
@@ -57,17 +54,19 @@ export default function Appointments() {
         body: JSON.stringify(form)
       });
 
-      if (res.ok) {
-        setShowModal(false);
-        setEditingId(null);
-        setForm({ appointment_date: '', patient_id: '', doctor_id: '', status: 'Запланирован' });
-        loadData();
-      } else {
-        alert('Ошибка сохранения');
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || 'Ошибка сохранения');
+        return;
       }
+
+      setShowModal(false);
+      setEditingId(null);
+      setForm({ appointment_date: '', patient_id: '', doctor_id: '', status: 'Запланирован' });
+      loadData();
     } catch (err) {
-      console.error(err);
-      alert('Ошибка соединения');
+      alert('Ошибка соединения с сервером');
     }
   };
 
@@ -91,7 +90,9 @@ export default function Appointments() {
   return (
     <div className="max-w-[1126px] mx-auto">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-semibold text-[var(--text-h)]">Записи на приём</h1>
+        <h1 className="text-4xl font-semibold text-[var(--text-h)] flex items-center gap-3">
+          <Calendar className="w-9 h-9" /> Записи на приём
+        </h1>
         <button
           onClick={() => { 
             setEditingId(null); 
@@ -104,9 +105,10 @@ export default function Appointments() {
         </button>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 rounded-3xl border border-[var(--border)] overflow-hidden">
+      {/* Таблица записей */}
+      <div className="bg-white rounded-3xl border border-[var(--border)] overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 dark:bg-gray-800">
+          <thead className="bg-gray-50">
             <tr>
               <th className="p-5 text-left">Дата и время</th>
               <th className="p-5 text-left">Пациент</th>
@@ -117,16 +119,20 @@ export default function Appointments() {
           </thead>
           <tbody>
             {appointments.map(app => (
-              <tr key={app.id} className="border-t border-[var(--border)] hover:bg-gray-50 dark:hover:bg-gray-800">
-                <td className="p-5">{new Date(app.appointment_date).toLocaleString('ru-RU')}</td>
+              <tr key={app.id} className="border-t border-[var(--border)] hover:bg-gray-50">
+                <td className="p-5 font-medium">
+                  {new Date(app.appointment_date).toLocaleString('ru-RU', { 
+                    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' 
+                  })}
+                </td>
                 <td className="p-5">{app.patient?.name || '—'}</td>
                 <td className="p-5">{app.doctor?.name || '—'}</td>
                 <td className="p-5">
-                  <span className="px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">
+                  <span className={`px-4 py-1 rounded-full text-sm ${app.status === 'Завершен' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
                     {app.status}
                   </span>
                 </td>
-                <td className="p-5 text-center space-x-3">
+                <td className="p-5 text-center space-x-4">
                   <button onClick={() => editAppointment(app)} className="text-blue-600 hover:text-blue-700">
                     <Edit2 className="w-5 h-5" />
                   </button>
@@ -140,9 +146,10 @@ export default function Appointments() {
         </table>
       </div>
 
+      {/* Модальное окно создания/редактирования */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-900 p-10 rounded-3xl w-full max-w-lg border border-[var(--border)]">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-white p-10 rounded-3xl w-full max-w-lg border border-[var(--border)]">
             <h2 className="text-3xl font-semibold mb-8">
               {editingId ? 'Редактировать запись' : 'Новая запись'}
             </h2>
@@ -156,43 +163,24 @@ export default function Appointments() {
                 required
               />
 
-              <select 
-                value={form.patient_id} 
-                onChange={e => setForm({...form, patient_id: +e.target.value})} 
-                className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" 
-                required
-              >
+              <select value={form.patient_id} onChange={e => setForm({...form, patient_id: +e.target.value})} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" required>
                 <option value="">Выберите пациента</option>
                 {users.filter(u => u.role?.name === "Пациент").map(u => (
                   <option key={u.id} value={u.id}>{u.name}</option>
                 ))}
               </select>
 
-              <select 
-                value={form.doctor_id} 
-                onChange={e => setForm({...form, doctor_id: +e.target.value})} 
-                className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" 
-                required
-              >
+              <select value={form.doctor_id} onChange={e => setForm({...form, doctor_id: +e.target.value})} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" required>
                 <option value="">Выберите врача</option>
                 {users.filter(u => u.role?.name !== "Пациент").map(u => (
                   <option key={u.id} value={u.id}>{u.name}</option>
                 ))}
               </select>
 
-              <button 
-                type="submit" 
-                className="w-full bg-[var(--accent)] text-white py-4 rounded-2xl text-lg font-medium hover:bg-violet-600"
-              >
+              <button type="submit" className="w-full bg-[var(--accent)] text-white py-4 rounded-2xl text-lg font-medium hover:bg-violet-600">
                 {editingId ? 'Сохранить изменения' : 'Создать запись'}
               </button>
-              <button 
-                type="button" 
-                onClick={() => setShowModal(false)} 
-                className="w-full py-4 text-[var(--text)] hover:bg-gray-100 rounded-2xl"
-              >
-                Отмена
-              </button>
+              <button type="button" onClick={() => setShowModal(false)} className="w-full py-4 text-[var(--text)]">Отмена</button>
             </form>
           </div>
         </div>

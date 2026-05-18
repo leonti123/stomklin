@@ -41,19 +41,16 @@ namespace NaumovStomKlin.API.Controllers
             var doctorExists = await _context.Users.AnyAsync(u => u.id == appointment.doctor_id);
 
             if (!patientExists || !doctorExists)
-            {
-                return BadRequest(new { message = "Пациент или врач не существует" });
-            }
+                return BadRequest(new { message = "Пациент или врач не найден" });
 
-            // ←←← НОВАЯ ПРОВЕРКА НА ДВОЙНУЮ ЗАПИСЬ
-            var existingAppointment = await _context.Appointments
-                .AnyAsync(a => a.doctor_id == appointment.doctor_id
-                            && a.appointment_date == appointment.appointment_date);
+            // ←←← ЗАЩИТА ОТ ДВОЙНОЙ ЗАПИСИ ←←←
+            var isDoubleBooking = await _context.Appointments.AnyAsync(a =>
+                a.doctor_id == appointment.doctor_id &&
+                a.appointment_date == appointment.appointment_date &&
+                a.status != "Отменен");
 
-            if (existingAppointment)
-            {
-                return BadRequest(new { message = "На это время уже есть запись к данному врачу!" });
-            }
+            if (isDoubleBooking)
+                return BadRequest(new { message = "Врач уже занят на это время. Выберите другое время." });
 
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();

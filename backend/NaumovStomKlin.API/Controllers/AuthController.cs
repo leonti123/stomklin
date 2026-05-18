@@ -38,7 +38,7 @@ namespace NaumovStomKlin.API.Controllers
                 email = dto.email,
                 phone_number = dto.phone_number,
                 address = dto.address,
-                date_of_birth = dto.date_of_birth,        // ← Добавили
+                date_of_birth = dto.date_of_birth,        // ← Добавлено
                 role_id = dto.role_id,
                 password_hash = HashPassword(dto.password)
             };
@@ -78,12 +78,12 @@ namespace NaumovStomKlin.API.Controllers
     // DTO классы
     public class RegisterDto
     {
-        public string name { get; set; } = string.Empty;
-        public string email { get; set; } = string.Empty;
-        public string password { get; set; } = string.Empty;
-        public string phone_number { get; set; } = string.Empty;
+        public string name { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string phone_number { get; set; }
         public string address { get; set; } = "";
-        public DateTime? date_of_birth { get; set; }     // ← Добавлено
+        public DateTime? date_of_birth { get; set; }   // ← Добавлено
         public int role_id { get; set; }
     }
 
