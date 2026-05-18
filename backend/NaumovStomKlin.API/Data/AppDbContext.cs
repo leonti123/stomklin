@@ -17,6 +17,8 @@ namespace NaumovStomKlin.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
+
             // Связь Пациент
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.patient)

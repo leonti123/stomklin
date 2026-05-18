@@ -7,20 +7,17 @@ import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import Procedures from './pages/Procedures';
 import Appointments from './pages/Appointments';
+import DoctorSchedule from './pages/DoctorSchedule';
+import Reports from './pages/Reports';
 import ErrorBoundary from './components/ErrorBoundary';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 function ProtectedRoute({ children, allowedRoles = [] }) {
-  const { user, isAdmin, isDoctor, isPatient } = useAuth();
-  
-  if (!user) return <Navigate to="/login" replace />;
+  const isAuthenticated = localStorage.getItem('token') !== null;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   if (allowedRoles.length === 0) return children;
-
-  const userRole = user.role?.name;
-  if (allowedRoles.includes(userRole)) return children;
-
-  return <Navigate to="/" replace />;
+  return children; // можно усилить позже
 }
 
 function App() {
@@ -31,20 +28,17 @@ function App() {
           <Navbar />
           <main className="flex-1 p-6 bg-[var(--bg)] min-h-[calc(100vh-64px)]">
             <ErrorBoundary>
-              <Routes>             
-                <Route path="/doctor-schedule" element={<ProtectedRoute allowedRoles={['Врач']}><DoctorSchedule /></ProtectedRoute>} />
-                <Route path="/reports" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Reports /></ProtectedRoute>} />
+              <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 
                 <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/appointments" element={<ProtectedRoute><Appointments /></ProtectedRoute>} />
+                <Route path="/doctor-schedule" element={<ProtectedRoute><DoctorSchedule /></ProtectedRoute>} />
                 
-                {/* Только для Администратора и Руководства */}
-                <Route path="/users" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Users /></ProtectedRoute>} />
-                <Route path="/procedures" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Procedures /></ProtectedRoute>} />
-                
-                {/* Для Врача можно добавить позже */}
+                <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
+                <Route path="/procedures" element={<ProtectedRoute><Procedures /></ProtectedRoute>} />
+                <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
               </Routes>
             </ErrorBoundary>
           </main>
