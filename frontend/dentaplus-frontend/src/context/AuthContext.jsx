@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-const API_BASE = 'http://localhost:5274/api';
+const API_BASE = 'http://localhost:7057/api';
 
 const AuthContext = createContext();
 
@@ -15,8 +15,8 @@ export const AuthProvider = ({ children }) => {
     });
 
     if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.message || 'Неверный email или пароль');
+      const error = await res.json().catch(() => ({}));
+      throw new Error(error.message || 'Неверный email или пароль');
     }
 
     const data = await res.json();
@@ -30,17 +30,22 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const isAdmin = () => user?.role?.name === 'Администратор' || user?.role?.name === 'Руководство';
+  const isDoctor = () => user?.role?.name === 'Врач';
+  const isPatient = () => user?.role?.name === 'Пациент';
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      login, 
+      logout,
+      isAdmin,
+      isDoctor,
+      isPatient 
+    }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth должен использоваться внутри AuthProvider');
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);
