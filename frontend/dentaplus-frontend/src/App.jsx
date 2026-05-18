@@ -8,17 +8,25 @@ import Users from './pages/Users';
 import Procedures from './pages/Procedures';
 import Appointments from './pages/Appointments';
 import ErrorBoundary from './components/ErrorBoundary';
-import { AuthProvider } from './context/AuthContext';   // ← Добавили
+import { AuthProvider, useAuth } from './context/AuthContext';
 
-function ProtectedRoute({ children }) {
-  const isAuthenticated = localStorage.getItem('token') !== null;
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+function ProtectedRoute({ children, allowedRoles = [] }) {
+  const { user, isAdmin, isDoctor, isPatient } = useAuth();
+  
+  if (!user) return <Navigate to="/login" replace />;
+
+  if (allowedRoles.length === 0) return children;
+
+  const userRole = user.role?.name;
+  if (allowedRoles.includes(userRole)) return children;
+
+  return <Navigate to="/" replace />;
 }
 
 function App() {
   return (
     <Router>
-      <AuthProvider>                     {/* ← Оборачиваем всё здесь */}
+      <AuthProvider>
         <div id="root">
           <Navbar />
           <main className="flex-1 p-6 bg-[var(--bg)] min-h-[calc(100vh-64px)]">
@@ -28,9 +36,13 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 
                 <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
-                <Route path="/procedures" element={<ProtectedRoute><Procedures /></ProtectedRoute>} />
                 <Route path="/appointments" element={<ProtectedRoute><Appointments /></ProtectedRoute>} />
+                
+                {/* Только для Администратора и Руководства */}
+                <Route path="/users" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Users /></ProtectedRoute>} />
+                <Route path="/procedures" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Procedures /></ProtectedRoute>} />
+                
+                {/* Для Врача можно добавить позже */}
               </Routes>
             </ErrorBoundary>
           </main>

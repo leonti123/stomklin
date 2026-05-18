@@ -33,19 +33,26 @@ namespace NaumovStomKlin.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Appointment>> Create(Appointment appointment)
         {
-            if (appointment == null) return BadRequest(new { message = "Данные приёма пусты" });
+            if (appointment == null)
+                return BadRequest(new { message = "Данные приёма пусты" });
 
-            // Исправлено: ищем пациента и врача в таблице Users
+            // Проверка существования пациента и врача
             var patientExists = await _context.Users.AnyAsync(u => u.id == appointment.patient_id);
             var doctorExists = await _context.Users.AnyAsync(u => u.id == appointment.doctor_id);
 
             if (!patientExists || !doctorExists)
             {
-                return BadRequest(new
-                {
-                    message = "Ошибка: Указан несуществующий пациент или врач.",
-                    details = new { patient_found = patientExists, doctor_found = doctorExists }
-                });
+                return BadRequest(new { message = "Пациент или врач не существует" });
+            }
+
+            // ←←← НОВАЯ ПРОВЕРКА НА ДВОЙНУЮ ЗАПИСЬ
+            var existingAppointment = await _context.Appointments
+                .AnyAsync(a => a.doctor_id == appointment.doctor_id
+                            && a.appointment_date == appointment.appointment_date);
+
+            if (existingAppointment)
+            {
+                return BadRequest(new { message = "На это время уже есть запись к данному врачу!" });
             }
 
             _context.Appointments.Add(appointment);

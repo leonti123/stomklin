@@ -15,38 +15,41 @@ namespace NaumovStomKlin.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Рекомендуется вызывать базовый метод первым
             base.OnModelCreating(modelBuilder);
 
-            // Настройка связи для Пациента
+            // Связь Пациент
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.patient)
                 .WithMany(u => u.appointments_as_patient)
                 .HasForeignKey(a => a.patient_id)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Настройка связи для Врача
+            // Связь Врач
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.doctor)
                 .WithMany(u => u.appointments_as_doctor)
                 .HasForeignKey(a => a.doctor_id)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Связь Пользователь -> Роль
+            // Связь Пользователь → Роль
             modelBuilder.Entity<User>()
                 .HasOne(u => u.role)
                 .WithMany(r => r.users)
                 .HasForeignKey(u => u.role_id);
 
-            // Настройка точности для цен (денежный формат)
+            // Настройка поля даты рождения
+            modelBuilder.Entity<User>()
+                .Property(u => u.date_of_birth)
+                .HasColumnType("date");
+
+            // Настройка точности цены
             modelBuilder.Entity<Procedure>()
                 .Property(p => p.price)
                 .HasColumnType("decimal(18,2)");
 
-            // Опционально: Настройка связующей таблицы, если у нее нет своего ID, 
-            // а используется пара (id приема + id процедуры)
+            // Можно раскомментировать, если хочешь композитный ключ
             // modelBuilder.Entity<Appointment_procedure>()
-            //    .HasKey(ap => new { ap.appointment_id, ap.procedure_id });
+            //     .HasKey(ap => new { ap.appointment_id, ap.procedure_id });
         }
     }
 }

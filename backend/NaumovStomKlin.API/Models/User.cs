@@ -3,12 +3,14 @@
     public class User
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public string email { get; set; }
-        public string phone_number { get; set; }
-        public string address { get; set; }
+        public string name { get; set; } = string.Empty;
+        public string email { get; set; } = string.Empty;
+        public string phone_number { get; set; } = string.Empty;
+        public string address { get; set; } = string.Empty;
 
-        public string password_hash { get; set; }     // ← Добавь это поле
+        public DateTime? date_of_birth { get; set; }   // ← Добавлено
+
+        public string password_hash { get; set; } = string.Empty;
 
         public int role_id { get; set; }
         public Role? role { get; set; }
