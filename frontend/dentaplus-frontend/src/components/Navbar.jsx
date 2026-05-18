@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Calendar, Stethoscope, Users } from 'lucide-react';
+import { LogOut, User, Calendar, Stethoscope, Users, BarChart3 } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -12,56 +12,54 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white border-b border-[var(--border)] sticky top-0 z-50 shadow-sm">
-      <div className="max-w-[1126px] mx-auto px-6 py-5 flex items-center justify-between">
-        
-        {/* Логотип + Новое название */}
+    <nav className="bg-white dark:bg-slate-900 border-b border-[var(--border)] sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg">
+          <div className="w-11 h-11 bg-violet-600 rounded-2xl flex items-center justify-center text-3xl text-white">
             🦷
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-[var(--text-h)] tracking-tight">Dental Clinic</h1>
-            <p className="text-sm text-[var(--text)] -mt-1">Стоматология премиум класса</p>
+            <h1 className="text-2xl font-bold text-[var(--text-h)]">Dental Clinic</h1>
+            <p className="text-sm text-gray-500 -mt-1">Стоматология премиум класса</p>
           </div>
         </div>
 
-        {/* Меню */}
-        <div className="flex items-center gap-8 text-lg font-medium">
-          <Link to="/" className="hover:text-[var(--accent)] transition-colors">Главная</Link>
-          <Link to="/appointments" className="flex items-center gap-2 hover:text-[var(--accent)] transition-colors">
+        <div className="flex items-center gap-9 text-[17px]">
+          <Link to="/" className="hover:text-violet-600 transition">Главная</Link>
+          <Link to="/appointments" className="flex items-center gap-2 hover:text-violet-600 transition">
             <Calendar className="w-5 h-5" /> Записи
           </Link>
-          <Link to="/procedures" className="flex items-center gap-2 hover:text-[var(--accent)] transition-colors">
+          <Link to="/procedures" className="flex items-center gap-2 hover:text-violet-600 transition">
             <Stethoscope className="w-5 h-5" /> Процедуры
           </Link>
-          <Link to="/users" className="flex items-center gap-2 hover:text-[var(--accent)] transition-colors">
-            <Users className="w-5 h-5" /> Пользователи
-          </Link>
+
+          {user && (user.role?.name === 'Администратор' || user.role?.name === 'Руководство') && (
+            <>
+              <Link to="/users" className="flex items-center gap-2 hover:text-violet-600 transition">
+                <Users className="w-5 h-5" /> Пользователи
+              </Link>
+              <Link to="/reports" className="flex items-center gap-2 hover:text-violet-600 transition">
+                <BarChart3 className="w-5 h-5" /> Отчёты
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Пользователь / Войти */}
         {user ? (
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 bg-[var(--accent-bg)] px-5 py-2.5 rounded-2xl border border-[var(--accent-border)]">
-              <User className="w-6 h-6 text-[var(--accent)]" />
-              <div>
+            <div className="flex items-center gap-3 bg-violet-50 dark:bg-violet-900/30 px-5 py-3 rounded-2xl">
+              <User className="w-6 h-6 text-violet-600" />
+              <div className="text-left">
                 <p className="font-medium text-[var(--text-h)]">{user.name}</p>
-                <p className="text-xs text-[var(--text)]">{user.role?.name}</p>
+                <p className="text-sm text-gray-500">{user.role?.name}</p>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="p-3 hover:bg-red-100 rounded-2xl text-red-600 hover:text-red-700 transition"
-            >
+            <button onClick={handleLogout} className="p-3 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-2xl text-red-600">
               <LogOut className="w-6 h-6" />
             </button>
           </div>
         ) : (
-          <Link 
-            to="/login" 
-            className="px-8 py-3 bg-[var(--accent)] text-white font-medium rounded-2xl hover:bg-violet-700 transition"
-          >
+          <Link to="/login" className="px-8 py-3 bg-violet-600 text-white rounded-2xl font-medium hover:bg-violet-700 transition">
             Войти
           </Link>
         )}

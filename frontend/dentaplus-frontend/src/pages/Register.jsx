@@ -8,7 +8,7 @@ export default function Register() {
     password: '',
     phone_number: '',
     address: '',
-    date_of_birth: '',     // ← Новое поле
+    date_of_birth: '',
     role_id: 1
   });
   const [roles, setRoles] = useState([]);
@@ -16,13 +16,15 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const API_BASE = 'http://localhost:7057/api';   // ← убедись, что порт правильный
+  const API_BASE = 'http://localhost:7057/api';
 
   useEffect(() => {
-    fetch(`${API_BASE}/RolsContr`)
-      .then(res => res.json())
-      .then(setRoles)
-      .catch(() => console.error("Не удалось загрузить роли"));
+    setRoles([
+      { id: 1, name: "Пациент" },
+      { id: 2, name: "Врач" },
+      { id: 3, name: "Администратор" },
+      { id: 4, name: "Руководство" }
+    ]);
   }, []);
 
   const handleChange = (e) => {
@@ -35,19 +37,27 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/Auth/register`, {
+      // Временный вариант — создаём пользователя напрямую
+      const res = await fetch(`${API_BASE}/UsersContr`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone_number: form.phone_number,
+          address: form.address,
+          role_id: parseInt(form.role_id),
+          password_hash: "123456"   // временно, потом будет хэш
+        })
       });
 
-      if (!res.ok) {
-        const err = await res.json();
+      if (res.ok) {
+        alert('✅ Регистрация прошла успешно! Теперь можете войти.');
+        navigate('/login');
+      } else {
+        const err = await res.json().catch(() => ({}));
         throw new Error(err.message || 'Ошибка регистрации');
       }
-
-      alert('✅ Регистрация прошла успешно!');
-      navigate('/login');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -64,42 +74,25 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <input type="text" name="name" placeholder="ФИО" value={form.name} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          
           <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          
           <input type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-
           <input type="date" name="date_of_birth" value={form.date_of_birth} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-
           <input type="text" name="phone_number" placeholder="Телефон" value={form.phone_number} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-
           <input type="text" name="address" placeholder="Адрес" value={form.address} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
 
-          <select 
-            name="role_id" 
-            value={form.role_id} 
-            onChange={handleChange} 
-            className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl"
-            required
-          >
-            <option value="">Выберите роль</option>
+          <select name="role_id" value={form.role_id} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" required>
             {roles.map(r => (
               <option key={r.id} value={r.id}>{r.name}</option>
             ))}
           </select>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[var(--accent)] hover:bg-violet-600 text-white font-medium py-4 rounded-2xl transition disabled:opacity-70"
-          >
+          <button type="submit" disabled={loading} className="w-full bg-[var(--accent)] hover:bg-violet-600 text-white font-medium py-4 rounded-2xl transition disabled:opacity-70">
             {loading ? 'Регистрация...' : 'Зарегистрироваться'}
           </button>
         </form>
 
         <p className="text-center mt-6">
-          Уже есть аккаунт?{' '}
-          <Link to="/login" className="text-[var(--accent)] hover:underline">Войти</Link>
+          Уже есть аккаунт? <Link to="/login" className="text-[var(--accent)] hover:underline">Войти</Link>
         </p>
       </div>
     </div>
