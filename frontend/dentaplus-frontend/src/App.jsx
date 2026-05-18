@@ -31,7 +31,9 @@ function App() {
           <Navbar />
           <main className="flex-1 p-6 bg-[var(--bg)] min-h-[calc(100vh-64px)]">
             <ErrorBoundary>
-              <Routes>
+              <Routes>             
+                <Route path="/doctor-schedule" element={<ProtectedRoute allowedRoles={['Врач']}><DoctorSchedule /></ProtectedRoute>} />
+                <Route path="/reports" element={<ProtectedRoute allowedRoles={['Администратор', 'Руководство']}><Reports /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 
