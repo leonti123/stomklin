@@ -19,11 +19,17 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({ email, password })
     });
 
-    if (!res.ok) throw new Error('Неверный email или пароль');
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.message || 'Неверный email или пароль');
+    }
 
     const data = await res.json();
+    
+    // Сохраняем только пользователя
     localStorage.setItem('user', JSON.stringify(data.user));
     setUser(data.user);
+
     return data.user;
   };
 
@@ -34,12 +40,17 @@ export const AuthProvider = ({ children }) => {
 
   const isAdmin = () => user?.role?.name === 'Администратор' || user?.role?.name === 'Руководство';
   const isDoctor = () => user?.role?.name === 'Врач';
+  const isPatient = () => user?.role?.name === 'Пациент';
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAdmin, isDoctor }}>
+    <AuthContext.Provider value={{ user, login, logout, isAdmin, isDoctor, isPatient }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth должен использоваться внутри AuthProvider');
+  return context;
+};

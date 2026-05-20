@@ -31,31 +31,62 @@ namespace NaumovStomKlin.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Appointment>> Create(Appointment appointment)
+        public async Task<ActionResult<Appointment>> Create([FromBody] AppointmentCreateDto dto)
         {
-            if (appointment == null)
+            if (dto == null)
                 return BadRequest(new { message = "Данные приёма пусты" });
 
             // Проверка существования пациента и врача
-            var patientExists = await _context.Users.AnyAsync(u => u.id == appointment.patient_id);
-            var doctorExists = await _context.Users.AnyAsync(u => u.id == appointment.doctor_id);
+            var patientExists = await _context.Users.AnyAsync(u => u.id == dto.patient_id);
+            var doctorExists = await _context.Users.AnyAsync(u => u.id == dto.doctor_id);
 
             if (!patientExists || !doctorExists)
                 return BadRequest(new { message = "Пациент или врач не найден" });
 
-            // ←←← ЗАЩИТА ОТ ДВОЙНОЙ ЗАПИСИ ←←←
+            // Проверка двойной записи (уже было — оставляем)
             var isDoubleBooking = await _context.Appointments.AnyAsync(a =>
-                a.doctor_id == appointment.doctor_id &&
-                a.appointment_date == appointment.appointment_date &&
+                a.doctor_id == dto.doctor_id &&
+                a.appointment_date == dto.appointment_date &&
                 a.status != "Отменен");
 
             if (isDoubleBooking)
                 return BadRequest(new { message = "Врач уже занят на это время. Выберите другое время." });
 
-            _context.Appointments.Add(appointment);
-            await _context.SaveChangesAsync();
+            // Создаём Appointment
+            var appointment = new Appointment
+            {
+                patient_id = dto.patient_id,
+                doctor_id = dto.doctor_id,
+                appointment_date = dto.appointment_date,
+                status = dto.status ?? "Запланирован"
+            };
 
-            return CreatedAtAction(nameof(GetById), new { id = appointment.id }, appointment);
+            _context.Appointments.Add(appointment);
+            await _context.SaveChangesAsync();        // Сохраняем, чтобы получить ID
+
+            // Сохраняем выбранные услуги в Appointment_procedure
+            if (dto.procedure_ids != null && dto.procedure_ids.Any())
+            {
+                foreach (var procId in dto.procedure_ids)
+                {
+                    _context.Appointment_procedurs.Add(new Appointment_procedure
+                    {
+                        appointment_id = appointment.id,
+                        procedure_id = procId
+                    });
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            // Возвращаем полную запись с подгруженными данными
+            var created = await _context.Appointments
+                .Include(a => a.patient)
+                .Include(a => a.doctor)
+                .Include(a => a.appointment_procedures!)
+                    .ThenInclude(ap => ap.procedure)
+                .FirstOrDefaultAsync(a => a.id == appointment.id);
+
+            return CreatedAtAction(nameof(GetById), new { id = appointment.id }, created);
         }
 
         [HttpGet("{id}")]

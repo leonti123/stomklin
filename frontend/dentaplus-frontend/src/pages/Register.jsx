@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Stethoscope } from 'lucide-react';
+
+const API_BASE = 'http://localhost:7057/api';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -11,21 +14,10 @@ export default function Register() {
     date_of_birth: '',
     role_id: 1
   });
-  const [roles, setRoles] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const API_BASE = 'http://localhost:7057/api';
-
-  useEffect(() => {
-    setRoles([
-      { id: 1, name: "Пациент" },
-      { id: 2, name: "Врач" },
-      { id: 3, name: "Администратор" },
-      { id: 4, name: "Руководство" }
-    ]);
-  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,27 +29,19 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // Временный вариант — создаём пользователя напрямую
-      const res = await fetch(`${API_BASE}/UsersContr`, {
+      const res = await fetch(`${API_BASE}/Auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone_number: form.phone_number,
-          address: form.address,
-          role_id: parseInt(form.role_id),
-          password_hash: "123456"   // временно, потом будет хэш
-        })
+        body: JSON.stringify(form)
       });
 
-      if (res.ok) {
-        alert('✅ Регистрация прошла успешно! Теперь можете войти.');
-        navigate('/login');
-      } else {
-        const err = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const err = await res.json();
         throw new Error(err.message || 'Ошибка регистрации');
       }
+
+      alert('✅ Регистрация прошла успешно! Теперь войдите в систему.');
+      navigate('/login');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -66,33 +50,50 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 bg-gray-50">
-      <div className="bg-white p-10 rounded-3xl shadow-xl w-full max-w-md border border-[var(--border)]">
-        <h2 className="text-3xl font-semibold text-center mb-8">Регистрация в Dental Clinic</h2>
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-[#0f172a]">
+      <div className="bg-slate-900 p-12 rounded-3xl shadow-2xl w-full max-w-md border border-slate-700">
+        <div className="flex justify-center mb-8">
+          <Stethoscope className="w-16 h-16 text-violet-400" />
+        </div>
+        <h2 className="text-4xl font-bold text-center mb-10">Регистрация</h2>
 
-        {error && <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-2xl text-center">{error}</div>}
+        {error && (
+          <div className="mb-6 p-4 bg-red-500/20 border border-red-500 text-red-400 rounded-2xl text-center">
+            {error}
+          </div>
+        )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <input type="text" name="name" placeholder="ФИО" value={form.name} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          <input type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} required className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          <input type="date" name="date_of_birth" value={form.date_of_birth} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          <input type="text" name="phone_number" placeholder="Телефон" value={form.phone_number} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
-          <input type="text" name="address" placeholder="Адрес" value={form.address} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" />
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input type="text" name="name" placeholder="ФИО" onChange={handleChange} required 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
+          
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} required 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
+          
+          <input type="password" name="password" placeholder="Пароль" onChange={handleChange} required 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
+          
+          <input type="tel" name="phone_number" placeholder="Телефон" onChange={handleChange} 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
+          
+          <input type="text" name="address" placeholder="Адрес" onChange={handleChange} 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
+          
+          <input type="date" name="date_of_birth" onChange={handleChange} 
+            className="w-full px-6 py-5 bg-slate-800 border border-slate-700 rounded-3xl focus:outline-none focus:border-violet-500 text-lg" />
 
-          <select name="role_id" value={form.role_id} onChange={handleChange} className="w-full px-5 py-4 border border-[var(--border)] rounded-2xl" required>
-            {roles.map(r => (
-              <option key={r.id} value={r.id}>{r.name}</option>
-            ))}
-          </select>
-
-          <button type="submit" disabled={loading} className="w-full bg-[var(--accent)] hover:bg-violet-600 text-white font-medium py-4 rounded-2xl transition disabled:opacity-70">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-6 bg-violet-600 hover:bg-violet-700 rounded-3xl text-2xl font-semibold transition-all"
+          >
             {loading ? 'Регистрация...' : 'Зарегистрироваться'}
           </button>
         </form>
 
-        <p className="text-center mt-6">
-          Уже есть аккаунт? <Link to="/login" className="text-[var(--accent)] hover:underline">Войти</Link>
+        <p className="text-center mt-8 text-slate-400">
+          Уже есть аккаунт?{' '}
+          <Link to="/login" className="text-violet-400 hover:underline">Войти</Link>
         </p>
       </div>
     </div>

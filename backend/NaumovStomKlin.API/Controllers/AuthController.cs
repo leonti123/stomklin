@@ -49,23 +49,24 @@ namespace NaumovStomKlin.API.Controllers
             return Ok(new { message = "Регистрация прошла успешно!" });
         }
 
-        // ====================== ЛОГИН ======================
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto dto)
-        {
-            var user = await _context.Users
-                .Include(u => u.role)
-                .FirstOrDefaultAsync(u => u.email == dto.email);
+ [HttpPost("login")]
+public async Task<IActionResult> Login([FromBody] LoginDto dto)
+{
+    var user = await _context.Users
+        .Include(u => u.role)
+        .FirstOrDefaultAsync(u => u.email == dto.email);
 
-            if (user == null || user.password_hash != HashPassword(dto.password))
-                return Unauthorized(new { message = "Неверный email или пароль" });
+    if (user == null || user.password_hash != HashPassword(dto.password))
+        return Unauthorized(new { message = "Неверный email или пароль" });
 
-            return Ok(new
-            {
-                message = "Вход выполнен успешно",
-                user
-            });
-        }
+    Console.WriteLine($"✅ Успешный вход: {user.email} ({user.name})");
+
+    return Ok(new
+    {
+        message = "Вход выполнен успешно",
+        user
+    });
+}
 
         private string HashPassword(string password)
         {

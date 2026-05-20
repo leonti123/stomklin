@@ -1,67 +1,66 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Calendar, Stethoscope, Users, BarChart3 } from 'lucide-react';
+import { LogOut, User, Calendar, Stethoscope, FileText, Home, LayoutDashboard } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
+  const handleLogout = () => { logout(); navigate('/login'); };
+
+  const role = user?.role?.name;
+  const isAdmin = role === 'Администратор' || role === 'Руководство';
+  const isDoctor = role === 'Врач';
+  const isPatient = role === 'Пациент';
+
+  const navLink = (to, icon, label) => {
+    const active = location.pathname === to;
+    return (
+      <Link to={to} className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-colors ${active ? 'bg-violet-600 text-white' : 'hover:text-violet-400'}`}>
+        {icon}{label}
+      </Link>
+    );
   };
 
   return (
-    <nav className="bg-white dark:bg-slate-900 border-b border-[var(--border)] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 bg-violet-600 rounded-2xl flex items-center justify-center text-3xl text-white">
-            🦷
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-[var(--text-h)]">Dental Clinic</h1>
-            <p className="text-sm text-gray-500 -mt-1">Стоматология премиум класса</p>
-          </div>
-        </div>
+    <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-3">
+          <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center text-lg">🦷</div>
+          <span className="text-xl font-bold">ДентаПлюс</span>
+        </Link>
 
-        <div className="flex items-center gap-9 text-[17px]">
-          <Link to="/" className="hover:text-violet-600 transition">Главная</Link>
-          <Link to="/appointments" className="flex items-center gap-2 hover:text-violet-600 transition">
-            <Calendar className="w-5 h-5" /> Записи
-          </Link>
-          <Link to="/procedures" className="flex items-center gap-2 hover:text-violet-600 transition">
-            <Stethoscope className="w-5 h-5" /> Процедуры
-          </Link>
+        <div className="flex items-center gap-1 text-sm font-medium">
+          {navLink('/', <Home className="w-4 h-4" />, 'Главная')}
+          {navLink('/procedures', <Stethoscope className="w-4 h-4" />, 'Услуги')}
 
-          {user && (user.role?.name === 'Администратор' || user.role?.name === 'Руководство') && (
-            <>
-              <Link to="/users" className="flex items-center gap-2 hover:text-violet-600 transition">
-                <Users className="w-5 h-5" /> Пользователи
-              </Link>
-              <Link to="/reports" className="flex items-center gap-2 hover:text-violet-600 transition">
-                <BarChart3 className="w-5 h-5" /> Отчёты
-              </Link>
-            </>
-          )}
+          {isPatient && navLink('/appointments', <Calendar className="w-4 h-4" />, 'Запись')}
+          {isPatient && navLink('/cabinet', <User className="w-4 h-4" />, 'Кабинет')}
+
+          {isDoctor && navLink('/doctor', <LayoutDashboard className="w-4 h-4" />, 'Мои приёмы')}
+
+          {/* Админ видит И запись И управление */}
+          {isAdmin && navLink('/appointments', <Calendar className="w-4 h-4" />, 'Запись')}
+          {isAdmin && navLink('/admin', <LayoutDashboard className="w-4 h-4" />, 'Управление')}
+          {isAdmin && navLink('/reports', <FileText className="w-4 h-4" />, 'Отчёты')}
         </div>
 
         {user ? (
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 bg-violet-50 dark:bg-violet-900/30 px-5 py-3 rounded-2xl">
-              <User className="w-6 h-6 text-violet-600" />
-              <div className="text-left">
-                <p className="font-medium text-[var(--text-h)]">{user.name}</p>
-                <p className="text-sm text-gray-500">{user.role?.name}</p>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-xl">
+              <User className="w-4 h-4 text-violet-400" />
+              <div>
+                <p className="text-sm font-medium leading-tight">{user.name}</p>
+                <p className="text-xs text-slate-400">{user.role?.name}</p>
               </div>
             </div>
-            <button onClick={handleLogout} className="p-3 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-2xl text-red-600">
-              <LogOut className="w-6 h-6" />
+            <button onClick={handleLogout} className="p-2 hover:bg-red-900/30 rounded-xl text-red-400 transition-colors" title="Выйти">
+              <LogOut className="w-5 h-5" />
             </button>
           </div>
         ) : (
-          <Link to="/login" className="px-8 py-3 bg-violet-600 text-white rounded-2xl font-medium hover:bg-violet-700 transition">
-            Войти
-          </Link>
+          <Link to="/login" className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-xl text-sm font-medium transition">Войти</Link>
         )}
       </div>
     </nav>
