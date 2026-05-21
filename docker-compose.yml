@@ -1,4 +1,4 @@
-Set-Content "C:\Users\Леонтий\Desktop\Новая папка (6)\stomklin\docker-compose.yml" "services:
+services:
   backend:
     build: ./backend/NaumovStomKlin.API
     container_name: dental-backend
@@ -28,9 +28,6 @@ Set-Content "C:\Users\Леонтий\Desktop\Новая папка (6)\stomklin\
       - '1433:1433'
     volumes:
       - mssql_data:/var/opt/mssql
-      - ./init.sql:/init.sql
-      - ./entrypoint.sh:/entrypoint.sh
-    command: /bin/bash /entrypoint.sh
 
 volumes:
-  mssql_data:"
+  mssql_data:

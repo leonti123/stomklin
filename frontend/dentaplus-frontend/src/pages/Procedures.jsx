@@ -3,15 +3,12 @@ import { Stethoscope, X } from 'lucide-react';
 
 const API_BASE = 'http://localhost:7057/api';
 
-// Описания услуг (можно потом вынести в базу)
 const serviceDescriptions = {
-  1: "Первичный осмотр полости рта, консультация и составление плана лечения.",
-  2: "Комплексное лечение кариеса с использованием современных материалов.",
-  3: "Удаление зуба под местной анестезией с минимальным травматизмом.",
-  4: "Профессиональная гигиена полости рта, снятие зубного камня и налёта.",
-  5: "Установка светоотверждаемой пломбы премиум-класса.",
-  6: "Профессиональное отбеливание зубов системой Beyond или Zoom.",
-  7: "Панорамный снимок челюсти (ОПТГ) для полной диагностики.",
+  'Чистка зубов': 'Профессиональная гигиена полости рта, снятие зубного камня и налёта ультразвуковым методом.',
+  'Пломбирование': 'Комплексное лечение кариеса с использованием современных световых пломбировочных материалов.',
+  'Удаление зуба': 'Удаление зуба под местной анестезией с минимальным травматизмом и быстрым восстановлением.',
+  'Отбеливание': 'Профессиональное отбеливание зубов системой Beyond или Zoom. Результат — до 8 тонов светлее.',
+  'Рентген': 'Панорамный снимок челюсти (ОПТГ) для полной диагностики состояния зубов и костной ткани.',
 };
 
 export default function Procedures() {
@@ -53,7 +50,7 @@ export default function Procedures() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {procedures.map(proc => (
-          <div 
+          <div
             key={proc.id}
             onClick={() => openModal(proc)}
             className="bg-slate-900/70 border border-slate-700 rounded-3xl p-8 hover:border-violet-400 transition-all cursor-pointer group"
@@ -70,11 +67,11 @@ export default function Procedures() {
       {/* Модальное окно */}
       {selectedService && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={closeModal}>
-          <div 
+          <div
             className="bg-slate-900 rounded-3xl max-w-lg w-full mx-4 p-8 relative"
-            onClick={e => e.stopImmediatePropagation()}
+            onClick={e => e.stopPropagation()}
           >
-            <button 
+            <button
               onClick={closeModal}
               className="absolute top-6 right-6 text-slate-400 hover:text-white"
             >
@@ -87,7 +84,7 @@ export default function Procedures() {
             </p>
 
             <p className="text-slate-300 leading-relaxed text-lg">
-              {serviceDescriptions[selectedService.id] || "Подробное описание услуги будет добавлено позже."}
+              {serviceDescriptions[selectedService.name] || 'Подробное описание услуги будет добавлено позже.'}
             </p>
 
             <button
